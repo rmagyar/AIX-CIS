@@ -1,0 +1,5 @@
+---
+
+- name: "2.3 Allowlist Authorized Software and Report Violations"
+  ansible.builtin.command:
+    - trustchk -p TE=ON CHKEXEC=ON

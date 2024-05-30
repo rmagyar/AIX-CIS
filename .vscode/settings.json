@@ -1,0 +1,6 @@
+{
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/playbook": "file:///Users/rmagyar/Documents/Work/Projects/Ansible/AIX-CIS/tasks/section_2/cis_2.3.yml"
+    },
+    "ansible.python.interpreterPath": "/usr/local/bin/python3"
+}
