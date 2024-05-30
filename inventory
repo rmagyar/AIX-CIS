@@ -1,0 +1,5 @@
+[aix]
+aix-2 ansible_host=10.103.12.162
+
+[aix:vars]
+ansible_user=root

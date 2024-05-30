@@ -1,2 +1,12 @@
 ---
 # tasks file for AIX-CIS
+- name: Check OS version and family
+  ansible.builtin.assert:
+      that: (ansible_facts.distribution == 'AIX') and ansible_facts.distribution_major_version is version_compare('7', '==')
+      fail_msg: "This role can only be run against Supported OSs. {{ ansible_facts.distribution }} {{ ansible_facts.distribution_major_version }} is not supported."
+      success_msg: "This role is running against a supported OS {{ ansible_facts.distribution }} {{ ansible_facts.distribution_major_version }}"
+  when:
+      - os_check
+  tags:
+      - always
+

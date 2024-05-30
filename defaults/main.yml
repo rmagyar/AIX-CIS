@@ -1,2 +1,6 @@
 ---
 # defaults file for AIX-CIS
+# Run the OS validation check
+# Supported OSs will not need for this to be changed - see README e.g. CentOS
+os_check: true
+
