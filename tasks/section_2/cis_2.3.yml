@@ -1,0 +1,27 @@
+---
+
+- name: "2.3 Allowlist Authorized Software and Report Violations"
+
+  tags:
+    - level_1
+
+  block:
+    - name: Enabling TE
+      ansible.builtin.shell: >
+        set -o pipefail && trustchk -p TE 2>&1 | grep -q "=ON"
+        && echo "TE_ENABLED"
+        || trustchk -p TE=ON
+      args:
+        executable: /bin/bash
+      register: te_status
+      changed_when: te_status.stdout != 'TE_ENABLED'
+
+    - name: Enabling CHKEXEC
+      ansible.builtin.shell: >
+        set -o pipefail && trustchk -p CHKEXEC 2>&1 | grep -q "=ON"
+        && echo "CHKEXEC_ENABLED"
+        || trustchk -p CHKEXEC=ON
+      args:
+        executable: /bin/bash
+      register: chkexec_status
+      changed_when: chkexec_status.stdout != 'CHKEXEC_ENABLED'

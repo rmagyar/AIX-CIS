@@ -1,0 +1,17 @@
+---
+
+- name: "2.7 Remove Unused Symbolic Links"
+
+  tags:
+    - level_1
+
+  block:
+    - name: Finding broken symbolic links
+      ansible.builtin.command: find -L / \( -fstype jfs -o -fstype jfs2 \) -type l -ls
+      changed_when: true
+      failed_when: false
+      register: broken_links
+
+    - name: Broken symbolic links
+      ansible.builtin.debug:
+        msg: "{{ ['The following broken links found:'] + broken_links.stdout_lines }}"

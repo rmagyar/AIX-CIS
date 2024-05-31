@@ -1,2 +1,3 @@
 ---
 # vars file for AIX-CIS
+aixcis_section2: true

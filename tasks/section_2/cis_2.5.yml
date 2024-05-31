@@ -1,0 +1,27 @@
+---
+
+- name: "2.5 Allowlist Authorized Scripts and Report Violations"
+
+  tags:
+    - level_1
+
+  block:
+    - name: Enabling TE
+      ansible.builtin.shell: >
+        set -o pipefail && trustchk -p TE 2>&1 | grep -q "=ON"
+        && echo "TE_ENABLED"
+        || trustchk -p TE=ON
+      args:
+        executable: /bin/bash
+      register: te_status
+      changed_when: te_status.stdout != 'TE_ENABLED'
+
+    - name: Enabling CHKSCRIPT
+      ansible.builtin.shell: >
+        set -o pipefail && trustchk -p CHKSCRIPT 2>&1 | grep -q "=ON"
+        && echo "CHKSCRIPT_ENABLED"
+        || trustchk -p CHKSCRIPT=ON
+      args:
+        executable: /bin/bash
+      register: chkscript_status
+      changed_when: chkscript_status.stdout != 'CHKSCRIPT_ENABLED'

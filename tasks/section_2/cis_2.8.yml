@@ -1,0 +1,17 @@
+---
+
+- name: "2.8 Ensure the Trusted Execution Policies cannot be modified"
+
+  tags:
+    - level_2
+
+  block:
+    - name: Enabling LOCK_KERN_POLICIES
+      ansible.builtin.shell: >
+        set -o pipefail && trustchk -p LOCK_KERN_POLICIES 2>&1 | grep -q "=ON"
+        && echo "LOCK_KERN_POLICIES_ENABLED"
+        || trustchk -p LOCK_KERN_POLICIES=ON
+      args:
+        executable: /bin/bash
+      register: lock_kern_policies_status
+      changed_when: lock_kern_policies_status.stdout != 'LOCK_KERN_POLICIES_ENABLED'

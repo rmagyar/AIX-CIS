@@ -1,0 +1,37 @@
+---
+
+- name: "2.4 Allowlist Authorized Libraries and Report Violations"
+
+  tags:
+    - level_1
+
+  block:
+    - name: Enabling TE
+      ansible.builtin.shell: >
+        set -o pipefail && trustchk -p TE 2>&1 | grep -q "=ON"
+        && echo "TE_ENABLED"
+        || trustchk -p TE=ON
+      args:
+        executable: /bin/bash
+      register: te_status
+      changed_when: te_status.stdout != 'TE_ENABLED'
+
+    - name: Enabling CHKSHLIB
+      ansible.builtin.shell: >
+        set -o pipefail && trustchk -p CHKSHLIB 2>&1 | grep -q "=ON"
+        && echo "CHKSHLIB_ENABLED"
+        || trustchk -p CHKSHLIB=ON
+      args:
+        executable: /bin/bash
+      register: chkshlib_status
+      changed_when: chkshlib_status.stdout != 'CHKSHLIB_ENABLED'
+
+    - name: Enabling CHKKERNEXT
+      ansible.builtin.shell: >
+        set -o pipefail && trustchk -p CHKKERNEXT 2>&1 | grep -q "=ON"
+        && echo "CHKKERNEXT_ENABLED"
+        || trustchk -p CHKKERNEXT=ON
+      args:
+        executable: /bin/bash
+      register: chkkernext_status
+      changed_when: chkkernext_status.stdout != 'CHKKERNEXT_ENABLED'

@@ -1,0 +1,25 @@
+---
+
+- name: "SECTION - 2.3 - Allowlist Authorized Software and Report Violations"
+  ansible.builtin.import_tasks:
+    file: cis_2.3.yml
+
+- name: "SECTION - 2.4 - Allowlist Authorized Libraries and Report Violations"
+  ansible.builtin.import_tasks:
+    file: cis_2.4.yml
+
+- name: "SECTION - 2.5 - Allowlist Authorized Scripts and Report Violations"
+  ansible.builtin.import_tasks:
+    file: cis_2.5.yml
+
+- name: "SECTION - 2.6 - Enforce Allowlist aka Trusted Execution Checks"
+  ansible.builtin.import_tasks:
+    file: cis_2.6.yml
+
+- name: "SECTION - 2.7 - Remove Unused Symbolic Links"
+  ansible.builtin.import_tasks:
+    file: cis_2.7.yml
+
+- name: "SECTION - 2.8 - Ensure the Trusted Execution Policies cannot be modified"
+  ansible.builtin.import_tasks:
+    file: cis_2.8.yml
